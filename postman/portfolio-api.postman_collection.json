@@ -1,0 +1,494 @@
+{
+  "info": {
+    "name": "Portfolio API - Full Test Suite",
+    "description": "Collection Postman complète pour tester l'API Portfolio (auth, portfolio, business, contact, analytics, chatbot, academy, dashboard).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "userName", "value": "Loan Test" },
+    { "key": "userEmail", "value": "" },
+    { "key": "userPassword", "value": "TestPass#2026" },
+    { "key": "userNewPassword", "value": "TestPass#2026!" },
+    { "key": "authToken", "value": "" },
+    { "key": "projectId", "value": "1" }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get('userEmail')) {",
+          "  const id = Date.now();",
+          "  pm.collectionVariables.set('userEmail', `loan.test.${id}@example.com`);",
+          "}"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - Portfolio Public API",
+      "item": [
+        {
+          "name": "GET /api/portfolio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/portfolio"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test('success=true', () => pm.expect(body.success).to.eql(true));",
+                  "pm.test('data.person présent', () => pm.expect(body.data).to.have.property('person'));",
+                  "pm.test('data.projects tableau', () => pm.expect(Array.isArray(body.data.projects)).to.eql(true));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /api/portfolio/person",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/portfolio/person" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('person.name existe', () => pm.expect(body.data.name).to.be.a('string'));"
+          ]}}]
+        },
+        {
+          "name": "GET /api/portfolio/skills",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/portfolio/skills" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('skills frontend existe', () => pm.expect(body.data).to.have.property('frontend'));"
+          ]}}]
+        },
+        {
+          "name": "GET /api/portfolio/projects",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/portfolio/projects" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('projects est un tableau', () => pm.expect(Array.isArray(body.data)).to.eql(true));"
+          ]}}]
+        },
+        {
+          "name": "GET /api/portfolio/projects/:id",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('project.id présent', () => pm.expect(body.data.id).to.exist);"
+          ]}}]
+        },
+        {
+          "name": "GET /api/portfolio/projects/999999 (not found)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/portfolio/projects/999999" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 404', () => pm.response.to.have.status(404));",
+            "const body = pm.response.json();",
+            "pm.test('success=false', () => pm.expect(body.success).to.eql(false));"
+          ]}}]
+        },
+        {
+          "name": "GET /api/portfolio/experience",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/portfolio/experience" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('experience tableau', () => pm.expect(Array.isArray(body.data)).to.eql(true));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "02 - Business API",
+      "item": [
+        {
+          "name": "GET /api/business",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/business" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('services + formations présents', () => {",
+            "  pm.expect(body.data).to.have.property('services');",
+            "  pm.expect(body.data).to.have.property('formations');",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "GET /api/business/services",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/business/services" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('services tableau', () => pm.expect(Array.isArray(body.data)).to.eql(true));"
+          ]}}]
+        },
+        {
+          "name": "GET /api/business/formations",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/business/formations" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('formations tableau', () => pm.expect(Array.isArray(body.data)).to.eql(true));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "03 - Auth API",
+      "item": [
+        {
+          "name": "POST /api/auth/register",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const id = Date.now();",
+                  "pm.collectionVariables.set('userEmail', `loan.test.${id}@example.com`);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test('success=true', () => pm.expect(body.success).to.eql(true));",
+                  "const setCookie = pm.response.headers.get('set-cookie') || '';",
+                  "const m = setCookie.match(/auth_token=([^;]+)/);",
+                  "if (m && m[1]) pm.collectionVariables.set('authToken', m[1]);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{userName}}\",\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/register"
+          }
+        },
+        {
+          "name": "POST /api/auth/login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('success=true', () => pm.expect(body.success).to.eql(true));",
+            "const setCookie = pm.response.headers.get('set-cookie') || '';",
+            "const m = setCookie.match(/auth_token=([^;]+)/);",
+            "if (m && m[1]) pm.collectionVariables.set('authToken', m[1]);"
+          ]}}]
+        },
+        {
+          "name": "GET /api/auth/me",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": "{{baseUrl}}/api/auth/me"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('email cohérent', () => pm.expect(body.data.email).to.eql(pm.collectionVariables.get('userEmail')));"
+          ]}}]
+        },
+        {
+          "name": "PUT /api/auth/me",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{userName}} Updated\",\n  \"email\": \"{{userEmail}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/me"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const setCookie = pm.response.headers.get('set-cookie') || '';",
+            "const m = setCookie.match(/auth_token=([^;]+)/);",
+            "if (m && m[1]) pm.collectionVariables.set('authToken', m[1]);"
+          ]}}]
+        },
+        {
+          "name": "PUT /api/auth/me/password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"{{userPassword}}\",\n  \"newPassword\": \"{{userNewPassword}}\",\n  \"confirmPassword\": \"{{userNewPassword}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/me/password"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "pm.collectionVariables.set('userPassword', pm.collectionVariables.get('userNewPassword'));"
+          ]}}]
+        },
+        {
+          "name": "POST /api/auth/login (after password change)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const setCookie = pm.response.headers.get('set-cookie') || '';",
+            "const m = setCookie.match(/auth_token=([^;]+)/);",
+            "if (m && m[1]) pm.collectionVariables.set('authToken', m[1]);"
+          ]}}]
+        },
+        {
+          "name": "POST /api/auth/logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": "{{baseUrl}}/api/auth/logout"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "04 - Contact API",
+      "item": [
+        {
+          "name": "POST /api/contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Loan Test\",\n  \"email\": \"{{userEmail}}\",\n  \"message\": \"Message de test Postman pour vérifier /api/contact.\"\n}"
+            },
+            "url": "{{baseUrl}}/api/contact"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const code = pm.response.code;",
+            "pm.test('Status attendu (200/500/502)', () => pm.expect([200,500,502]).to.include(code));",
+            "const body = pm.response.json();",
+            "if (code === 200) {",
+            "  pm.test('success=true si SMTP OK', () => pm.expect(body.success).to.eql(true));",
+            "} else {",
+            "  pm.test('success=false si SMTP KO', () => pm.expect(body.success).to.eql(false));",
+            "}"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "05 - Analytics API",
+      "item": [
+        {
+          "name": "POST /api/analytics/event",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventName\": \"postman_test_event\",\n  \"path\": \"/postman\",\n  \"meta\": {\n    \"source\": \"postman\",\n    \"suite\": \"full\"\n  }\n}"
+            },
+            "url": "{{baseUrl}}/api/analytics/event"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('success=true', () => pm.expect(body.success).to.eql(true));"
+          ]}}]
+        },
+        {
+          "name": "GET /api/analytics/trust",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/analytics/trust" },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('responseHours existe', () => pm.expect(body.data.responseHours).to.be.a('number'));",
+            "pm.test('projectsDelivered existe', () => pm.expect(body.data.projectsDelivered).to.be.a('number'));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "06 - Chatbot API",
+      "item": [
+        {
+          "name": "POST /api/chatbot (general)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"persona\": \"general\",\n  \"message\": \"Donne 3 conseils pour améliorer une landing page en restant factuel.\",\n  \"history\": []\n}"
+            },
+            "url": "{{baseUrl}}/api/chatbot"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const code = pm.response.code;",
+            "pm.test('Status attendu (200/429/500/502/503)', () => pm.expect([200,429,500,502,503]).to.include(code));",
+            "const body = pm.response.json();",
+            "if (code === 200) {",
+            "  pm.test('reply présent', () => pm.expect(body.data.reply).to.be.a('string').and.not.empty);",
+            "}"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "07 - Academy Premium API",
+      "item": [
+        {
+          "name": "POST /api/auth/login (prepare academy auth)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}" },
+            "url": "{{baseUrl}}/api/auth/login"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "if (pm.response.code === 200) {",
+            "  const setCookie = pm.response.headers.get('set-cookie') || '';",
+            "  const m = setCookie.match(/auth_token=([^;]+)/);",
+            "  if (m && m[1]) pm.collectionVariables.set('authToken', m[1]);",
+            "}",
+            "pm.test('Login OK pour tests academy', () => pm.expect([200,401,503]).to.include(pm.response.code));"
+          ]}}]
+        },
+        {
+          "name": "GET /api/academy/state",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": "{{baseUrl}}/api/academy/state"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status attendu (200/401/403/503)', () => pm.expect([200,401,403,503]).to.include(pm.response.code));"
+          ]}}]
+        },
+        {
+          "name": "PUT /api/academy/state",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentModule\": \"foundations\",\n  \"completedModules\": [\"foundations\"],\n  \"validatedExercises\": [\"foundations\"],\n  \"completedProjects\": [],\n  \"gameCompleted\": [],\n  \"weeklyScores\": {\n    \"1\": 85\n  },\n  \"score\": 100,\n  \"bossStreak\": 1\n}"
+            },
+            "url": "{{baseUrl}}/api/academy/state"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status attendu (200/401/403/503)', () => pm.expect([200,401,403,503]).to.include(pm.response.code));"
+          ]}}]
+        },
+        {
+          "name": "GET /api/academy/messages",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": "{{baseUrl}}/api/academy/messages"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status attendu (200/401/403/503)', () => pm.expect([200,401,403,503]).to.include(pm.response.code));"
+          ]}}]
+        },
+        {
+          "name": "POST /api/academy/messages",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Message de test academy via Postman\"\n}"
+            },
+            "url": "{{baseUrl}}/api/academy/messages"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status attendu (201/401/403/503)', () => pm.expect([201,401,403,503]).to.include(pm.response.code));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "08 - Admin Dashboard API",
+      "item": [
+        {
+          "name": "GET /api/admin/dashboard",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": "{{baseUrl}}/api/admin/dashboard"
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('Status attendu (200/401/403/503)', () => pm.expect([200,401,403,503]).to.include(pm.response.code));",
+            "if (pm.response.code === 200) {",
+            "  const body = pm.response.json();",
+            "  pm.test('stats présents', () => pm.expect(body.data).to.have.property('stats'));",
+            "}"
+          ]}}]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "portfolio-heron-loan",
+  "version": "1.0.0",
+  "description": "Portfolio professionnel de Loan HERON - Developer & Tech Enthusiast",
+  "main": "backend/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "db:setup": "node backend/scripts/setup-database.js",
+    "test": "npm run test:smoke",
+    "test:smoke": "node backend/scripts/smoke-test.js",
+    "check:syntax": "node --check backend/server.js && node --check backend/routes/chatbot.js && node --check backend/routes/contact.js && node --check public/assets/js/site.js"
+  },
+  "keywords": [
+    "portfolio",
+    "developer",
+    "react",
+    "nodejs",
+    "game-dev",
+    "cybersecurity"
+  ],
+  "author": "Loan HERON",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^5.3.8",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.5",
+    "nodemailer": "^8.0.1",
+    "openai": "^6.25.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

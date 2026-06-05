@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Loan Heron Studio</title>
+    <meta name="description" content="Profil utilisateur et gestion des accès.">
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/theme-light.css">
+</head>
+<body class="site-body">
+    <nav class="navbar navbar-expand-lg fixed-top site-nav">
+        <div class="container">
+            <a class="navbar-brand site-brand" href="/">Loan Heron Studio</a>
+            <button class="navbar-toggler btn-site-outline" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+                    <li class="nav-item"><a data-nav class="nav-link site-link" href="/">Accueil</a></li>
+                    <li class="nav-item"><a data-nav class="nav-link site-link" href="/services">Services</a></li>
+                    <li class="nav-item"><a data-nav class="nav-link site-link" href="/formations">Formations</a></li>
+                    <li class="nav-item"><a data-nav class="nav-link site-link" href="/chatbot">Chatbot IA</a></li>
+                    <li class="nav-item"><a data-nav class="nav-link site-link" href="/portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="btn btn-site-primary" href="/login">Connexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container page-main profile-main">
+        <section class="py-4">
+            <h1 class="hero-title mb-3">Mon profil</h1>
+            <p class="hero-subtitle">Gère ton compte avec des catégories dédiées: informations, confidentialité, sécurité et abonnement.</p>
+        </section>
+
+        <section class="py-2">
+            <div id="profileMessage" class="alert d-none" role="alert"></div>
+            <div class="glass-card auth-card profile-tabs-wrap">
+                <ul class="nav nav-pills profile-tabs" id="profileTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="tab-infos" data-bs-toggle="pill" data-bs-target="#pane-infos" type="button" role="tab" aria-controls="pane-infos" aria-selected="true">Infos</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab-confidentialite" data-bs-toggle="pill" data-bs-target="#pane-confidentialite" type="button" role="tab" aria-controls="pane-confidentialite" aria-selected="false">Confidentialité</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab-securite" data-bs-toggle="pill" data-bs-target="#pane-securite" type="button" role="tab" aria-controls="pane-securite" aria-selected="false">Sécurité</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab-abonnement" data-bs-toggle="pill" data-bs-target="#pane-abonnement" type="button" role="tab" aria-controls="pane-abonnement" aria-selected="false">Abonnement</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content profile-tab-content" id="profileTabsContent">
+                    <div class="tab-pane fade show active" id="pane-infos" role="tabpanel" aria-labelledby="tab-infos" tabindex="0">
+                        <div class="row g-3">
+                            <div class="col-lg-5">
+                                <div class="profile-section glass-card h-100">
+                                    <h2 class="h5 mb-3">Informations actuelles</h2>
+                                    <table class="table table-auth mb-0">
+                                        <tbody>
+                                            <tr><th>Nom</th><td id="profileName">-</td></tr>
+                                            <tr><th>Email</th><td id="profileEmail">-</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="profile-section glass-card h-100">
+                                    <h2 class="h5 mb-3">Modifier mes infos</h2>
+                                    <form id="profileInfoForm" class="row g-3">
+                                        <div class="col-12">
+                                            <label for="profileInputName" class="form-label">Nom</label>
+                                            <input id="profileInputName" name="name" class="form-control" type="text" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="profileInputEmail" class="form-label">Email</label>
+                                            <input id="profileInputEmail" name="email" class="form-control" type="email" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-site-primary" type="submit">Enregistrer mes infos</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pane-confidentialite" role="tabpanel" aria-labelledby="tab-confidentialite" tabindex="0">
+                        <div class="profile-section glass-card">
+                            <h2 class="h5 mb-3">Préférences de confidentialité</h2>
+                            <p class="text-light-emphasis mb-4">Ces options contrôlent la visibilité de ton profil et les communications liées au compte.</p>
+                            <form id="privacySettingsForm" class="row g-3">
+                                <div class="col-12 col-md-6">
+                                    <label class="profile-check">
+                                        <input class="form-check-input" type="checkbox" id="privacyPublicProfile">
+                                        <span class="form-check-label">Rendre mon profil visible publiquement</span>
+                                    </label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label class="profile-check">
+                                        <input class="form-check-input" type="checkbox" id="privacyEmailAlerts" checked>
+                                        <span class="form-check-label">Recevoir les alertes importantes par email</span>
+                                    </label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label class="profile-check">
+                                        <input class="form-check-input" type="checkbox" id="privacyProductNews">
+                                        <span class="form-check-label">Recevoir les nouveautés produit</span>
+                                    </label>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label class="profile-check">
+                                        <input class="form-check-input" type="checkbox" id="privacyAnalytics" checked>
+                                        <span class="form-check-label">Autoriser les analytics anonymisées</span>
+                                    </label>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-site-primary" type="submit">Enregistrer mes préférences</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pane-securite" role="tabpanel" aria-labelledby="tab-securite" tabindex="0">
+                        <div class="profile-section glass-card">
+                            <h2 class="h5 mb-3">Sécurité du compte</h2>
+                            <form id="profilePasswordForm" class="row g-3">
+                                <div class="col-12">
+                                    <label for="profileCurrentPassword" class="form-label">Mot de passe actuel</label>
+                                    <input id="profileCurrentPassword" name="currentPassword" class="form-control" type="password" autocomplete="current-password" required>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="profileNewPassword" class="form-label">Nouveau mot de passe</label>
+                                    <input id="profileNewPassword" name="newPassword" class="form-control" type="password" minlength="8" autocomplete="new-password" required>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="profileConfirmPassword" class="form-label">Confirmer le mot de passe</label>
+                                    <input id="profileConfirmPassword" name="confirmPassword" class="form-control" type="password" minlength="8" autocomplete="new-password" required>
+                                </div>
+                                <div class="col-12 d-flex gap-2 flex-wrap">
+                                    <button class="btn btn-site-outline" type="submit">Changer le mot de passe</button>
+                                    <button id="profileLogout" class="btn btn-site-outline" type="button">Se déconnecter</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pane-abonnement" role="tabpanel" aria-labelledby="tab-abonnement" tabindex="0">
+                        <div class="profile-section glass-card">
+                            <h2 class="h5 mb-3">Abonnement</h2>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-4">
+                                    <div class="profile-stat-box">
+                                        <small>Plan actuel</small>
+                                        <strong id="subscriptionPlan">Standard</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="profile-stat-box">
+                                        <small>Statut</small>
+                                        <strong id="subscriptionStatus">Actif</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="profile-stat-box">
+                                        <small>Renouvellement</small>
+                                        <strong id="subscriptionRenewal">Non défini</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button id="manageSubscriptionBtn" class="btn btn-site-primary" type="button">Gérer mon abonnement</button>
+                                <a class="btn btn-site-outline" href="/services">Voir les offres</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-site py-4">
+        <div class="container d-flex justify-content-between gap-2">
+            <span>Espace profil</span>
+            <a class="link-light text-decoration-none" href="/">Retour accueil</a>
+        </div>
+    </footer>
+
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/site.js?v=20260227-8"></script>
+    <script src="/assets/js/profile.js?v=20260227-8"></script>
+</body>
+</html>

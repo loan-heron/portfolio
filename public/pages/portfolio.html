@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Heron - Portfolio</title>
+    <meta name="description" content="Portfolio de Loan Heron : développeur web, bots Discord et automatisations. Projets, compétences et contact.">
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/portfolio-modern.css">
+    <link rel="stylesheet" href="/assets/css/theme-light.css">
+</head>
+<body class="site-body portfolio-page">
+    <nav class="navbar navbar-expand-lg fixed-top site-nav">
+        <div class="container">
+            <a class="navbar-brand site-brand" href="/">Loan Heron Studio</a>
+            <button class="navbar-toggler btn-site-outline" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+                    <li class="nav-item"><a class="nav-link site-link" href="#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link site-link" href="#projects">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link site-link" href="#experience">Parcours</a></li>
+                    <li class="nav-item"><a class="btn btn-site-primary" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="hero" class="portfolio-section portfolio-hero">
+            <div class="row g-3 align-items-center">
+                <div class="col-lg-7">
+                    <span class="hero-kicker">Portfolio développeur</span>
+                    <h1 class="hero-title mb-3" id="heroTitle">HERON Loan</h1>
+                    <p class="hero-subtitle mb-2" id="heroSubtitle">Étudiant développeur, je débute en freelance et je progresse projet après projet</p>
+                    <p class="text-light-emphasis mb-3" id="heroDescription">Je réalise des projets concrets pour apprendre vite, améliorer ma méthode et livrer des résultats propres à mes premiers clients.</p>
+                    <div class="hero-points">
+                        <span>Sites web</span>
+                        <span>Bots Discord</span>
+                        <span>Automatisations</span>
+                        <span>Cybersécurité</span>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-site-primary">Voir mes projets</a>
+                        <a href="#contact" class="btn btn-site-outline">Me contacter</a>
+                        <a href="/assets/files/CV.pdf" class="btn btn-site-outline" download>Télécharger mon CV</a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="hero-visual-card">
+
+                        <h3 class="h5">Disponible pour mes premières missions freelance</h3>
+                        <p class="text-light-emphasis mb-0">Je peux t’aider sur un site web, un bot Discord ou une automatisation simple, avec sérieux et envie de bien faire.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio-section quick-stats">
+            <div class="row g-3">
+                <div class="col-md-3 col-6"><div class="stat-card"><h3>10+</h3><p class="small text-light-emphasis mb-0">projets réalisés</p></div></div>
+                <div class="col-md-3 col-6"><div class="stat-card"><h3>5+</h3><p class="small text-light-emphasis mb-0">années de pratique en autodidacte</p></div></div>
+                <div class="col-md-3 col-6"><div class="stat-card"><h3>20+</h3><p class="small text-light-emphasis mb-0">technos testées en projet</p></div></div>
+                <div class="col-md-3 col-6"><div class="stat-card"><h3>100%</h3><p class="small text-light-emphasis mb-0">envie de progresser en continu</p></div></div>
+            </div>
+        </section>
+
+        <section id="about" class="portfolio-section">
+            <h2 class="section-title mb-3">À propos</h2>
+            <div class="about-layout">
+                <div class="info-card">
+                    <h3 class="h5">Mon approche</h3>
+                    <p class="text-light-emphasis">Je suis encore en phase de progression, donc j’avance avec une logique simple: comprendre le besoin, construire une première version propre, tester, puis améliorer.</p>
+                    <h4 class="h6 mt-4">Centres d'intérêt</h4>
+                    <div class="interests-grid" id="interestsGrid"></div>
+                </div>
+                <div class="d-grid gap-3">
+                    <div class="info-card"><h4 class="h6">Localisation</h4><p class="small text-light-emphasis mb-0">France</p></div>
+                    <div class="info-card"><h4 class="h6">Email</h4><p class="small text-light-emphasis mb-0">heronloan@gmail.com</p></div>
+                    <div class="info-card"><h4 class="h6">Formation</h4><p class="small text-light-emphasis mb-0">Terminale NSI / SI</p></div>
+                    <div class="info-card"><h4 class="h6">Disponibilité</h4><p class="small text-light-emphasis mb-0">Projets freelance & collaborations</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="portfolio-section">
+            <h2 class="section-title mb-2">Projets</h2>
+            <p class="section-subtitle mb-4">Chaque projet m’a permis d’apprendre une nouvelle compétence technique et de mieux comprendre les besoins réels.</p>
+            <div class="projects-grid" id="projectsGrid"></div>
+        </section>
+
+        <section id="experience" class="portfolio-section">
+            <h2 class="section-title mb-2">Parcours</h2>
+            <p class="section-subtitle mb-4">Mon parcours d’étudiant développeur, entre formation, stages et apprentissage autonome.</p>
+            <div class="experience-timeline" id="experienceTimeline"></div>
+        </section>
+
+        <section id="contact" class="portfolio-section">
+            <h2 class="section-title mb-2">Contact</h2>
+            <p class="section-subtitle mb-4">Tu as un projet ? Écris-moi et on voit ensemble ce que je peux réaliser pour toi.</p>
+            <div class="contact-layout">
+                <form class="contact-form" id="contactForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="subject">Sujet</label>
+                        <input class="form-control" type="text" id="subject" name="subject" placeholder="Ex: Site web, Bot Discord, Collaboration...">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="name">Nom</label>
+                        <input class="form-control" type="text" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-control" type="email" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="message">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-site-primary">Envoyer le message</button>
+                    <div class="form-message mt-3" id="formMessage"></div>
+                </form>
+
+                <div id="postContactRoadmap" class="info-card mt-3 d-none">
+                    <h3 class="h6 mb-2">Roadmap projet recommandée</h3>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-site-outline btn-sm roadmap-step" data-step="1">1. Cadrage stratégique</button>
+                        <button type="button" class="btn btn-site-outline btn-sm roadmap-step" data-step="2">2. Design & architecture</button>
+                        <button type="button" class="btn btn-site-outline btn-sm roadmap-step" data-step="3">3. Développement & QA</button>
+                        <button type="button" class="btn btn-site-outline btn-sm roadmap-step" data-step="4">4. Lancement & optimisation</button>
+                    </div>
+                    <p class="small text-light-emphasis mt-2 mb-0" id="roadmapStepDescription">Clique une étape pour voir l'action associée.</p>
+                </div>
+
+                <div class="contact-cards">
+                    <div class="info-card">
+                        <h3 class="h6">Email direct</h3>
+                        <p class="small text-light-emphasis">heronloan@gmail.com</p>
+                        <a href="mailto:heronloan@gmail.com" class="btn btn-site-outline btn-sm">Envoyer un email</a>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="h6">GitHub</h3>
+                        <p class="small text-light-emphasis">Mes projets d’apprentissage, tests techniques et évolutions de code.</p>
+                        <a href="https://github.com/loan-heron" class="btn btn-site-outline btn-sm" target="_blank" rel="noopener noreferrer">Voir le profil</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-site py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+            <span>© 2026 Loan Heron</span>
+            <div class="d-flex gap-3">
+                <a class="link-light text-decoration-none" href="https://github.com/loan-heron" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="link-light text-decoration-none" href="mailto:heronloan@gmail.com">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/site.js"></script>
+    <script src="/assets/js/home.js"></script>
+    <script src="/assets/js/about.js"></script>
+    <script src="/assets/js/skills.js"></script>
+    <script src="/assets/js/projects.js"></script>
+    <script src="/assets/js/experience.js"></script>
+    <script src="/assets/js/contact.js"></script>
+</body>
+</html>
