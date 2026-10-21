@@ -30,7 +30,7 @@ L'intro ne se joue qu'une fois par session. Pour la revoir : ouvre un nouvel ong
 - **Une vraie capture de projet** : mets l'image dans `assets/captures/`, puis remplace le contenu de `<span class="mock__screen">…</span>` par `<img src="assets/captures/fitstack.webp" alt="">` (format 16:10 conseillé).
 - **Un projet design** : dans la section `#design`, remplace le `<svg>` du wireframe dans `.shot__frame` par ton image.
 - **Savoir-faire** : chaque compétence a une barre de niveau sur 4. Change `data-l="3"` (de 1 à 4) et le `3/4` juste à côté (texte lu par les lecteurs d'écran).
-- **Captures des réalisations** : `assets/captures/fitstack.webp`, `lovan-studio.webp`, `elvo.webp` (format 16:10, haut de page). Si un fichier manque, l'aperçu dessiné s'affiche à la place.
+- **Captures des réalisations** : `assets/captures/fitstack.webp`, `elvo.webp` (format 16:10, haut de page). Si un fichier manque, l'aperçu dessiné s'affiche à la place.
 
 ## Mode clair / sombre
 
